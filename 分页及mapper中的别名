@@ -1,0 +1,34 @@
+分页：
+	select * from limit #{},#{}  
+	
+	
+	？ 不允许在关键字进行计算，需要在代码中进行计算完成后 传递到mapper中；
+	
+别名：typeAliases ,在 mybatis中配置别名，省略xml中的resultType中包路径，可用别名或类代替；
+
+	1.系统内置别名：吧类型全小写
+	2.给某个类取别名：
+	
+		2.1  alias="自定义"
+		<typeAliases>
+			<typeAliases type="com.wxh.pojo.People" alias=="peo"/>
+		</typeAliases>
+		2.2 在mapper.xml中引用people类
+	
+		<select id="page" resultType="peo" parameterType="map">
+			select * from people limit #{pageStart},#{pageSize}
+		</select>
+		
+	3.直接给某个包下所有类取别名,别名为类名，区分大小写：
+	
+		3.1 在mybatis.xml 中配置
+			<typeAliases>
+				<package name="com.wxh.pojo.People"/>
+			</typeAliases>
+		
+		3.2 在mapper.xml中通过类名引用
+			
+			<select id="page" resultType="People" parameterType="map">
+				select * from people limit #{pageStart},#{pageSize}
+			</select>
+	

@@ -1,0 +1,54 @@
+log4j 复习：
+	1.由apache 推出开源免费日志处理的类库。
+	
+	使用过程：
+		1.导入log4j  jar包。
+		2.在src下新建 log4j.properties （路径和名称都不允许改变）
+		
+			ConversionPattern :写表达式
+			log.appendr.LOGFILE.FILE  ：文件位置及名称（日志名称.log）；
+		
+	log4j输出级别：
+		1.fatal :致命的
+		2.error :错误的
+		3.warn :警告
+		4.info :普通信息
+		5.debug :调试信息
+		1 > 2 > 3 > 4 > 5 
+		
+	可以在log4j.properties 的第一行控制输出级别。及： log4j.rootCategory=INFO,CONSOLE（控制台）//这个位置些什么，就能往哪里输出信息
+													  log4j.rootCategory=INFO,CONSOLE（控制台）,LOGFILE //往控制台输出，也往文件中输出。
+												
+												
+												
+	2.pattern 中常用的几个表达式：
+		%C  ：表示输出的日志显示：包名+类型
+		%d{YYYY-MM-dd HH:mm:ss} :时间
+		%L   :行号
+		%m   :信息
+		%n   :换行
+	
+	
+	二：<settings> 标签
+	1.在mybatis全局配置文件中通过<settings>标签控制mybatis全局开关.
+	2.在mybatis.xml中开启log4j
+	
+		2.1前提必须保证有Log4j的jar包
+		2.2 在src下必须有log4j.propertis
+		<settings>
+			<setting name="logImpl" value="LOG4J"/>
+		</settings>
+		
+	3.log4j中可以输出指定内容的日志：
+		3.1 命名级别（包级别）：<mapper>namespace 属性中除了最后一个类名
+			eg:
+				namespace="com.wxh.mapper.peopleMapper" 其中包级别为：com.wxh.mapper,需要在log4j.properties中
+				
+				log4j.rootCategory=ERROR,CONSOLE,LOGFILE
+				log4j.logger.com.wxh.mapper=DEBUG     //com.wxh.mapper包下的类输出级别为debug,其他输出为error
+				
+		3.2 类级别 :namespace 属性值，namespace类名
+		
+			
+		3.3 方法级别 ：需要使用namespace 属性值+标签 Id 属性值
+	

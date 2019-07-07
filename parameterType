@@ -1,0 +1,18 @@
+ParameterType :控制参数类型（即从前端传入的参数类型）
+#{} ：用来获取参数，写法：
+						1.使用索引，从0开始：#{0};   表示第一个参数 ；
+						2.也可以使用#{param1} ；表示第一个参数 ； 
+						3.如果参数是对象： #{属性名} ；	
+						4.如果参数是map 写成#{key} ;
+						
+	eg:
+		<select id=“selId" resultType="com.pojo.people" parameterType="int">
+			select * from people where id={#0}		//#0   为id在pojo的位置;作用为获取前端传递过来的id值，进行查询
+		</select>
+		
+	
+	
+	
+	
+	mybatis中<insert> <update> <delete> 标签没有resultType属性，认为返回的都是int
+	
